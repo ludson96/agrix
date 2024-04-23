@@ -29,6 +29,12 @@ public class Person {
   public Person() {
   }
 
+  public Person(String username, String password, Role role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+  }
+
   public Long getId() {
     return id;
   }
