@@ -1,4 +1,4 @@
-package com.betrybe.agrix.ebytr.staff.entity;
+package com.betrybe.agrix.models.entities;
 
 
 import com.betrybe.agrix.ebytr.staff.security.Role;
