@@ -2,11 +2,14 @@ package com.betrybe.agrix.controllers;
 
 import com.betrybe.agrix.controllers.dto.AuthDto;
 import com.betrybe.agrix.controllers.dto.TokenDto;
+import com.betrybe.agrix.error.CustomError;
 import com.betrybe.agrix.services.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +29,22 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public TokenDto login(@RequestBody AuthDto authDto) {
-    UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(authDto.username(), authDto.password());
+  public TokenDto login(@RequestBody AuthDto authDto) throws CustomError {
+    try {
 
-    Authentication auth = authenticationManager.authenticate(usernamePassword);
+      UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
+          authDto.username(), authDto.password());
 
-    String token = tokenService.generateToken(auth.getName());
+      Authentication auth = authenticationManager.authenticate(usernamePassword);
 
-    return new TokenDto(token);
+      String token = tokenService.generateToken(auth.getName());
+
+      return new TokenDto(token);
+
+    } catch (AuthenticationException e) {
+      throw new CustomError(
+          "Username ou senha incorretos",
+          HttpStatus.FORBIDDEN.value());
+    }
   }
 }
