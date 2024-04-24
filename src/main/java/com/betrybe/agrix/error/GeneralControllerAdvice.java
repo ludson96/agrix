@@ -25,13 +25,6 @@ public class GeneralControllerAdvice {
         .body(error.getMessage());
   }
 
-  @ExceptionHandler(AccessDeniedException.class)
-  public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException error) {
-    return ResponseEntity
-        .status(HttpStatus.FORBIDDEN)
-        .body(error.getMessage());
-  }
-
   /**
    * Se receber um erro diferente do lançado será um erro interno.
    *
@@ -45,4 +38,16 @@ public class GeneralControllerAdvice {
         .body(error.getMessage());
   }
 
+  /**
+   * Exceção para alterar a mensagem de status.
+   *
+   * @param error Mensagem "Access Denied".
+   * @return Retorna status 403 e mensagem de acesso negado.
+   */
+  @ExceptionHandler(AccessDeniedException.class)
+  public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException error) {
+    return ResponseEntity
+        .status(HttpStatus.FORBIDDEN)
+        .body(error.getMessage());
+  }
 }

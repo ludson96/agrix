@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller da entidade Person.
+ */
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
@@ -23,6 +26,12 @@ public class PersonController {
     this.personService = personService;
   }
 
+  /**
+   * Método responsável por criar uma nova Person.
+   *
+   * @param createPersonDto Dados para criação de um Person (username, password e role).
+   * @return Retorna status 201 e o novo person, sem password e com o novo id.
+   */
   @PostMapping
   public ResponseEntity<ResponsePersonDto> insertPerson(
       @RequestBody CreatePersonDto createPersonDto

@@ -34,6 +34,13 @@ public class Person implements UserDetails {
   public Person() {
   }
 
+  /**
+   * Construtor para criar um Person.
+   *
+   * @param username Username da pessoa usuária
+   * @param password Senha da pessoa usuária
+   * @param role Nível de acesso da pessoa usuária.
+   */
   public Person(String username, String password, String role) {
     this.username = username;
     this.password = password;

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Classe controller da Auth, responsável por autenticação e login.
+ */
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -29,11 +32,19 @@ public class AuthController {
     this.tokenService = tokenService;
   }
 
+  /**
+   * Método responsável pelo login.
+   *
+   * @param authDto username e password passado no corpo para login.
+   * @return retorna um token para autenticação futura.
+   * @throws CustomError Caso o username ou password estejam incorretos retorna uma exceção.
+   */
   @PostMapping("/login")
   public TokenDto login(@RequestBody AuthDto authDto) throws CustomError {
     try {
 
-      UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(
+      UsernamePasswordAuthenticationToken usernamePassword =
+          new UsernamePasswordAuthenticationToken(
           authDto.username(), authDto.password());
 
       Authentication auth = authenticationManager.authenticate(usernamePassword);

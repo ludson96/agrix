@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * Classe contendo um filtro JWT, usado em SecurityConfig.
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 

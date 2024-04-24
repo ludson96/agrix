@@ -19,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Classe responsável por conter toda configuração de segurança referente a filtros e autenticação.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
@@ -31,6 +34,13 @@ public class SecurityConfig {
     this.jwtFilter = jwtFilter;
   }
 
+  /**
+   * Bean responsável por fazer papel de filtro de todas as rotas Http.
+   *
+   * @param httpSecurity filtro a ser aplicado no Http.
+   * @return Aplica filtros personalizados em cada requisição Http.
+   * @throws Exception Exceção lançada caso apresente erro.
+   */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     return httpSecurity
