@@ -59,7 +59,7 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     return Optional.of(
-        authHeader.replace("Bearer", "")
+        authHeader.replace("Bearer ", "")
     );
   }
 }

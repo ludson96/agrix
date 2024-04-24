@@ -4,6 +4,7 @@ import com.betrybe.agrix.controllers.dto.CreatePersonDto;
 import com.betrybe.agrix.controllers.dto.ResponsePersonDto;
 import com.betrybe.agrix.models.entities.Person;
 import com.betrybe.agrix.services.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ public class PersonController {
 
   private final PersonService personService;
 
+  @Autowired
   public PersonController(PersonService personService) {
     this.personService = personService;
   }

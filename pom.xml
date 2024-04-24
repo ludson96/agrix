@@ -25,12 +25,7 @@
 
   <dependencies>
 
-    <dependency>
-      <groupId>com.auth0</groupId>
-      <artifactId>java-jwt</artifactId>
-      <version>4.4.0</version>
-    </dependency>
-
+    <!-- Adicione suas dependências aqui, mas não altere as que já estão configuradas -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -57,11 +52,17 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
-    <dependency>
 
+    <dependency>
       <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>4.4.0</version>
     </dependency>
 
     <!-- Spring Boot -->
@@ -89,21 +90,18 @@
       <artifactId>junit-jupiter</artifactId>
       <version>5.4.2</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.4.2</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.4.2</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>

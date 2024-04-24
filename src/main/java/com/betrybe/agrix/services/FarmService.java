@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 /**
@@ -56,6 +57,7 @@ public class FarmService {
     return optionalFarm.get();
   }
 
+  @PreAuthorize("hasAnyAuthority('USER', 'MANAGER', 'ADMIN')")
   public List<Farm> findAllFarm() {
     return farmRepository.findAll();
   }
