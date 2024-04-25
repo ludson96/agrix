@@ -27,6 +27,8 @@ Esse produto foi desenvolvido em fases:
 - [Fase A](https://github.com/ludson96/agrix-fase-a)
 - [Fase B](https://github.com/ludson96/agrix-fase-b)
 
+
+
 ## Habilidades trabalhadas
 - Implementar gerenciamento de erros no Spring Web.
 - Utilizar campos de data nas rotas da API e no banco de dados
@@ -73,7 +75,65 @@ Esse produto foi desenvolvido em fases:
 
 </details>
 
-## Detalhamento dos endpoints
+## Detalhamento do projeto
+
+### Banco de dados
+
+<details>
+<summary><strong>🗄️ Descrição </strong></summary><br>
+
+![Modelo de tabelas](images/agrix-tabelas-fase-b.png)
+
+Nesse modelo, temos as seguintes tabelas:
+- `farm`: representa uma fazenda
+- `crop`: representa uma plantação, e está em relacionamento `n:1` ("muitos para um") com a tabela `farm`
+- `fertilizer`: representa um fertilizante, e está em um relacionamento `n:n` ("muitos para muitos") com a tabela `crop`. Esse relacionamento é realizado através da tabela `crop_fertilizer`.
+
+</details>
+
+### Autenticação no projeto
+
+<details>
+  <summary><strong>Instruções para autenticação:</strong></summary><br />
+
+### 1. `Endpoints de acesso público`:
+- POST `/persons` (cadastra novas pessoas, instruções abaixo)
+- POST `/auth/login` (realiza o login)
+
+### 2. `POST /auth/login`:
+
+<details>
+  <summary>Realiza o login</summary><br />
+
+Funciona da seguinte forma:
+
+- `/auth/login` (`POST`)
+    - deve receber via corpo do POST `username` e `password` da requisição.
+        - Exemplo de requisição:
+            ```json
+            {
+              "username": "zerocool",
+              "password": "senhasecreta"
+            }
+            ```
+    - em caso de sucesso:
+    - caso os dados estejam corretos, retorna um campo `token` contendo um JWT gerado
+      - Exemplo de resposta:
+
+        ```json
+        {
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhZ3JpeCIsInN1YiI6Im1ycm9ib3QiLCJleHAiOjE2ODk5ODY2NTN9.lyha4rMcMhFd_ij-farGCXuJy-1Tun1IpJd5Ot6z_5w"
+        }
+        ```
+    - caso os dados estejam incorretos, retorna status 403 
+
+</details>
+
+---
+
+</details>
+
+
 
 <details>
 
@@ -240,9 +300,8 @@ Funciona da seguinte forma:
 
 </details>
 
-</details>
-
 ---
+</details>
 
 <details>
 
@@ -408,9 +467,9 @@ A rota a ser criada é:
 
 </details>
 
-</details>
-
 ---
+
+</details>
 
 <details>
   <summary><strong>/fertilizers</strong></summary>
