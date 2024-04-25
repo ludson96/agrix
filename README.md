@@ -408,9 +408,9 @@ A rota a ser criada é:
 
 </details>
 
----
 </details>
 
+---
 
 <details>
   <summary><strong>/fertilizers</strong></summary>
