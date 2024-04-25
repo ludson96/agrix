@@ -94,11 +94,15 @@ Nesse modelo, temos as seguintes tabelas:
 ### Autenticação no projeto
 
 <details>
-  <summary><strong>Instruções para autenticação:</strong></summary><br />
+  <summary><strong>Instruções para autenticação</strong></summary><br />
 
 ### 1. `Endpoints de acesso público`:
 - POST `/persons` (cadastra novas pessoas, instruções abaixo)
 - POST `/auth/login` (realiza o login)
+- Rotas possuem limitações de Acesso, conforme abaixo:
+  - `GET /farms` role `USER`, `MANAGER` ou `ADMIN`;
+  - `GET /crops` role `MANAGER` ou `ADMIN`;
+  - `GET /fertilizers` role `ADMIN`.
 
 ### 2. `POST /auth/login`:
 
