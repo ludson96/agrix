@@ -26,6 +26,7 @@ Desenvolvi o Agrix, um sistema que permitirá a gestão e o monitoramento de faz
 Esse produto foi desenvolvido em fases:
 - [Fase A](https://github.com/ludson96/agrix-fase-a)
 - [Fase B](https://github.com/ludson96/agrix-fase-b)
+- [Fase C (Final) - Este]:(https://github.com/ludson96/agrix)
 
 
 
