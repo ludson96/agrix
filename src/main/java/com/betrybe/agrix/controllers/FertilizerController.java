@@ -41,7 +41,10 @@ public class FertilizerController {
    * @param fertilizerDto Corpo da requisição a ser adicionado.
    * @return Retorna status 201 e o novo Fertilizer com id.
    */
-  @Operation(summary = "Cadastrar fertilizante", description = "Cadastra um novo fertilizante (Requer Role ADMIN)")
+  @Operation(
+      summary = "Cadastrar fertilizante",
+      description = "Cadastra um novo fertilizante (Requer Role ADMIN)"
+  )
   @ApiResponse(responseCode = "201", description = "Fertilizante cadastrado com sucesso")
   @PostMapping
   public ResponseEntity<FertilizerDto> insertFertilizer(
@@ -58,7 +61,10 @@ public class FertilizerController {
    *
    * @return Retorna status 200 e um List com todos os Fertilizer cadastrados.
    */
-  @Operation(summary = "Listar todos os fertilizantes", description = "Retorna todos os fertilizantes cadastrados (Requer Role ADMIN)")
+  @Operation(
+      summary = "Listar todos os fertilizantes",
+      description = "Retorna todos os fertilizantes cadastrados (Requer Role ADMIN)"
+  )
   @ApiResponse(responseCode = "200", description = "Lista de fertilizantes")
   @GetMapping
   public ResponseEntity<List<FertilizerDto>> getAllFertilizes() {
@@ -81,7 +87,10 @@ public class FertilizerController {
    * @return Retorna status 200 e Fertilizer com id.
    * @throws CustomError Exceção lançada caso não encontre nenhum Fertilizer informado.
    */
-  @Operation(summary = "Buscar fertilizante por ID", description = "Retorna os detalhes de um fertilizante (Requer Role ADMIN)")
+  @Operation(
+      summary = "Buscar fertilizante por ID",
+      description = "Retorna os detalhes de um fertilizante (Requer Role ADMIN)"
+  )
   @ApiResponse(responseCode = "200", description = "Fertilizante encontrado")
   @ApiResponse(responseCode = "404", description = "Fertilizante não encontrado")
   @GetMapping("{id}")

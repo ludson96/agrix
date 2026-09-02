@@ -38,7 +38,10 @@ public class FarmController {
     this.farmService = farmService;
   }
 
-  @Operation(summary = "Criar fazenda", description = "Cadastra uma nova fazenda (Requer Role USER, MANAGER ou ADMIN)")
+  @Operation(
+      summary = "Criar fazenda",
+      description = "Cadastra uma nova fazenda (Requer Role USER, MANAGER ou ADMIN)"
+  )
   @ApiResponse(responseCode = "201", description = "Fazenda criada com sucesso")
   @PostMapping
   public ResponseEntity<Farm> insertFarm(@RequestBody FarmDto farmDto) {
@@ -46,7 +49,10 @@ public class FarmController {
     return ResponseEntity.status(HttpStatus.CREATED).body(newFarm);
   }
 
-  @Operation(summary = "Listar todas as fazendas", description = "Retorna todas as fazendas cadastradas")
+  @Operation(
+      summary = "Listar todas as fazendas",
+      description = "Retorna todas as fazendas cadastradas"
+  )
   @ApiResponse(responseCode = "200", description = "Lista de fazendas")
   @GetMapping
   public ResponseEntity<List<Farm>> getAllFarms() {
@@ -61,7 +67,10 @@ public class FarmController {
    * @return status http 200 e o Farm desejado.
    * @throws CustomError lança uma exceção caso o Farm especificado pelo id não exista.
    */
-  @Operation(summary = "Buscar fazenda por ID", description = "Retorna os detalhes de uma fazenda específica")
+  @Operation(
+      summary = "Buscar fazenda por ID",
+      description = "Retorna os detalhes de uma fazenda específica"
+  )
   @ApiResponse(responseCode = "200", description = "Fazenda encontrada")
   @ApiResponse(responseCode = "404", description = "Fazenda não encontrada")
   @GetMapping("/{id}")
@@ -72,7 +81,10 @@ public class FarmController {
         .body(optionalFarm);
   }
 
-  @Operation(summary = "Adicionar plantação à fazenda", description = "Cadastra uma nova plantação vinculada a uma fazenda existente")
+  @Operation(
+      summary = "Adicionar plantação à fazenda",
+      description = "Cadastra uma nova plantação vinculada a uma fazenda existente"
+  )
   @ApiResponse(responseCode = "201", description = "Plantação criada com sucesso")
   @ApiResponse(responseCode = "404", description = "Fazenda não encontrada")
   @PostMapping("/{farmId}/crops")
@@ -91,7 +103,10 @@ public class FarmController {
    * @return status http 200 e um List com todos os CropsDTO, retornando apenas o id de Farm.
    * @throws CustomError lança uma exceção caso o Farm especificado pelo id não exista.
    */
-  @Operation(summary = "Listar plantações de uma fazenda", description = "Retorna todas as plantações vinculadas a uma fazenda específica")
+  @Operation(
+      summary = "Listar plantações de uma fazenda",
+      description = "Retorna todas as plantações vinculadas a uma fazenda específica"
+  )
   @ApiResponse(responseCode = "200", description = "Lista de plantações da fazenda")
   @ApiResponse(responseCode = "404", description = "Fazenda não encontrada")
   @GetMapping("/{farmId}/crops")

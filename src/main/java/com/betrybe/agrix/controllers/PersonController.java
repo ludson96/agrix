@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Controller da entidade Person.
  */
-@Tag(name = "Pessoas (Usuários)", description = "Endpoints de gerenciamento e cadastro de pessoas/usuários")
+@Tag(name = "Pessoas (Usuários)", description = "Gerenciamento e cadastro de pessoas/usuários")
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
@@ -36,7 +36,10 @@ public class PersonController {
    * @param createPersonDto Dados para criação de um Person (username, password e role).
    * @return Retorna status 201 e o novo person, sem password e com o novo id.
    */
-  @Operation(summary = "Cadastrar usuário", description = "Cria um novo usuário no sistema com role (ADMIN, MANAGER ou USER)")
+  @Operation(
+      summary = "Cadastrar usuário",
+      description = "Cria um novo usuário no sistema com role (ADMIN, MANAGER ou USER)"
+  )
   @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso")
   @PostMapping
   public ResponseEntity<ResponsePersonDto> insertPerson(
