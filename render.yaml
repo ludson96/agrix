@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: agrix-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      # Descomente e preencha as variáveis de banco se conectar ao MySQL ou PostgreSQL gerenciado:
+      # - key: SPRING_DATASOURCE_URL
+      #   value: jdbc:mysql://<host>:<port>/<database>?useSSL=true
+      # - key: SPRING_DATASOURCE_USERNAME
+      #   value: <user>
+      # - key: SPRING_DATASOURCE_PASSWORD
+      #   value: <password>

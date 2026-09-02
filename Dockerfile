@@ -1,30 +1,31 @@
-# Primeiro estágio: Construção do pacote da aplicação
-FROM maven:3-openjdk-17 AS build-image
+# Estágio 1: Build da aplicação
+FROM maven:3.9.6-eclipse-temurin-17-alpine AS builder
 
-# Define o diretório de trabalho
-WORKDIR /to-build-app
+WORKDIR /build
 
-# Copia os arquivos necessários
+# Cache de dependências Maven
 COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copia o código fonte e compila sem rodar testes na imagem (testes rodam no CI)
 COPY src ./src
+RUN mvn clean package -DskipTests -B
 
-# Instalação das dependências utilizando Maven
-RUN mvn dependency:go-offline
-
-# Construção do pacote JAR utilizando Maven
-RUN mvn package
-
-# Segundo estágio: Construção da imagem final
+# Estágio 2: Imagem final enxuta de execução (Alpine JRE)
 FROM eclipse-temurin:17-jre-alpine
 
-# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia o pacote JAR da construção anterior
-COPY --from=build-image /to-build-app/target/your-application.jar ./your-application.jar
+# Usuário não-root para segurança
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
 
-# Exposição da porta 8080
+# Copia o artefato compilado
+COPY --from=builder /build/target/*.jar app.jar
+
+# Configuração de porta padrão e variáveis
+ENV PORT=8080
 EXPOSE 8080
 
-# Ponto de entrada para executar a aplicação
-ENTRYPOINT ["java", "-jar", "your-application.jar"]
+# Execução com suporte a flags dinâmicas de JVM
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dserver.port=${PORT} -jar app.jar"]

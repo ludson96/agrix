@@ -4,6 +4,9 @@ import com.betrybe.agrix.controllers.dto.AuthDto;
 import com.betrybe.agrix.controllers.dto.TokenDto;
 import com.betrybe.agrix.error.CustomError;
 import com.betrybe.agrix.services.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Classe controller da Auth, responsável por autenticação e login.
  */
+@Tag(name = "Autenticação", description = "Endpoints para login e obtenção de token JWT")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -39,6 +43,9 @@ public class AuthController {
    * @return retorna um token para autenticação futura.
    * @throws CustomError Caso o username ou password estejam incorretos retorna uma exceção.
    */
+  @Operation(summary = "Realizar login", description = "Autentica usuário existente e retorna o Bearer Token JWT")
+  @ApiResponse(responseCode = "200", description = "Login realizado com sucesso")
+  @ApiResponse(responseCode = "403", description = "Username ou senha incorretos")
   @PostMapping("/login")
   public TokenDto login(@RequestBody AuthDto authDto) throws CustomError {
     try {
