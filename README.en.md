@@ -11,6 +11,19 @@
 
 A complete and modular RESTful API built for agricultural ecosystem management — covering farms, crops, fertilizer inputs, and robust authentication based on JWT tokens and RBAC permissions.
 
+<p align="center">
+  <a href="#-about-the-project">About</a> •
+  <a href="#-application-deployment">Deployment</a> •
+  <a href="#-api-endpoints">Endpoints</a> •
+  <a href="#-features">Features</a> •
+  <a href="#️-technologies--tools-used">Technologies</a> •
+  <a href="#️-solution-architecture">Architecture</a> •
+  <a href="#-repository-structure">Structure</a> •
+  <a href="#-technical-decisions">Technical Decisions</a> •
+  <a href="#-how-to-run-the-project">How to Run</a> •
+  <a href="#-running-tests">Tests</a>
+</p>
+
 ## 📝 About The Project
 
 **Agrix** is a backend solution designed for integrated agribusiness property management. The system allows users to register farms, track planned or harvested crops associated with each property, link recommended fertilizers, and perform advanced crop queries by harvest period.
