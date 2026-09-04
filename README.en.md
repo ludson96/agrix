@@ -11,18 +11,21 @@
 
 A complete and modular RESTful API built for agricultural ecosystem management — covering farms, crops, fertilizer inputs, and robust authentication based on JWT tokens and RBAC permissions.
 
-<p align="center">
-  <a href="#-about-the-project">About</a> •
-  <a href="#-application-deployment">Deployment</a> •
-  <a href="#-api-endpoints">Endpoints</a> •
-  <a href="#-features">Features</a> •
-  <a href="#️-technologies--tools-used">Technologies</a> •
-  <a href="#️-solution-architecture">Architecture</a> •
-  <a href="#-repository-structure">Structure</a> •
-  <a href="#-technical-decisions">Technical Decisions</a> •
-  <a href="#-how-to-run-the-project">How to Run</a> •
-  <a href="#-running-tests">Tests</a>
-</p>
+## 📑 Table of Contents
+ 
+- [📝 About The Project](#-about-the-project)
+- [🖼️ Preview](#️-preview)
+- [🌐 Application Deployment](#-application-deployment)
+- [⚡ API Endpoints](#-api-endpoints)
+- [✨ Features](#-features)
+- [🛠️ Technologies & Tools](#️-technologies--tools-used)
+- [🏛️ Solution Architecture](#️-solution-architecture)
+- [📁 Repository Structure](#-repository-structure)
+- [💡 Technical Decisions](#-technical-decisions)
+- [🚀 How to Run the Project](#-how-to-run-the-project)
+- [🧪 Running Tests](#-running-tests)
+- [📄 License](#-license)
+-
 
 ## 📝 About The Project
 

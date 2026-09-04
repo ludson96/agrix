@@ -11,18 +11,21 @@
 
 API RESTful completa e modular desenvolvida para controle de ecossistemas agrícolas — abrangendo fazendas, safras/plantações, insumos de fertilização e autenticação robusta baseada em tokens JWT e permissões RBAC.
 
-<p align="center">
-  <a href="#-sobre-o-projeto">Sobre</a> •
-  <a href="#-deploy-da-aplicação">Deploy</a> •
-  <a href="#-api-endpoints">Endpoints</a> •
-  <a href="#-funcionalidades">Funcionalidades</a> •
-  <a href="#️-tecnologias-e-ferramentas-utilizadas">Tecnologias</a> •
-  <a href="#️-arquitetura-da-solução">Arquitetura</a> •
-  <a href="#-estrutura-do-repositório">Estrutura</a> •
-  <a href="#-decisões-técnicas">Decisões Técnicas</a> •
-  <a href="#-como-executar-o-projeto">Como Executar</a> •
-  <a href="#-executando-os-testes">Testes</a>
-</p>
+## 📑 Sumário
+
+- [📝 Sobre o Projeto](#-sobre-o-projeto)
+- [🖼️ Preview](#️-preview)
+- [🌐 Deploy da Aplicação](#-deploy-da-aplicação)
+- [⚡ API Endpoints](#-api-endpoints)
+- [✨ Funcionalidades](#-funcionalidades)
+- [🛠️ Tecnologias e Ferramentas](#️-tecnologias-e-ferramentas-utilizadas)
+- [🏛️ Arquitetura da Solução](#️-arquitetura-da-solução)
+- [📁 Estrutura do Repositório](#-estrutura-do-repositório)
+- [💡 Decisões Técnicas](#-decisões-técnicas)
+- [🚀 Como Executar o Projeto](#-como-executar-o-projeto)
+- [🧪 Executando os Testes](#-executando-os-testes)
+- [📄 Licença](#-licença)
+
 
 ## 📝 Sobre o Projeto
 
