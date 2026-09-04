@@ -7,141 +7,173 @@
 [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions-2088FF.svg?style=for-the-badge&logo=github-actions)](https://github.com/features/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-API RESTful robusta e escalável desenvolvida para a gestão e monitoramento de propriedades rurais, controle de safras/plantações e distribuição de fertilizantes, implementando autenticação e autorização baseadas em **JWT** e **Spring Security**.
+> 🇧🇷 **Português** | 🇺🇸 [**English Version**](README.en.md)
 
----
+API RESTful completa e modular desenvolvida para controle de ecossistemas agrícolas — abrangendo fazendas, safras/plantações, insumos de fertilização e autenticação robusta baseada em tokens JWT e permissões RBAC.
 
-## 🎯 Funcionalidades Principais
+## 📝 Sobre o Projeto
 
-- **Autenticação & Controle de Acesso (RBAC):**
-  - Registro de usuários com níveis de acesso granulares: `USER`, `MANAGER` e `ADMIN`.
-  - Autenticação stateless via tokens **JWT (JSON Web Tokens)**.
-- **Gestão de Fazendas (Farms):**
-  - Cadastro, listagem e detalhamento de fazendas.
-- **Gestão de Plantações (Crops):**
-  - Associação de plantações a fazendas específicas.
-  - Busca avançada de plantações por intervalo de datas de colheita estimada.
-- **Gestão de Fertilizantes (Fertilizers):**
-  - Cadastro e consulta de fertilizantes (restrito a `ADMIN`).
-  - Associação N:N entre plantações e fertilizantes aplicados.
-- **Documentação Interativa (OpenAPI 3 / Swagger):**
-  - Interface visual completa para exploração e testes de endpoints com suporte a autorização Bearer.
+O **Agrix** é uma solução de backend voltada para a gestão integrada de propriedades do agronegócio. O sistema permite cadastrar fazendas, registrar safras planejadas ou colhidas associadas a cada propriedade, vincular fertilizantes recomendados e realizar buscas avançadas de colheitas por período.
 
----
+A aplicação prioriza **segurança em camadas**, **manutenibilidade de código** e **aderência aos padrões da indústria**, utilizando Java 17, Spring Boot 3, arquitetura em camadas (Controller-Service-Repository), banco relacional (MySQL/H2) e containerização através de Docker.
 
-## 🛠️ Tecnologias e Ferramentas
+## 🖼️ Preview
 
-- **Linguagem & Framework:** Java 17, Spring Boot 3.1.1
-- **Persistência & Banco de Dados:** Spring Data JPA, Hibernate, MySQL 8.0, H2 Database (Testes)
-- **Segurança:** Spring Security 6, Auth0 Java JWT, BCrypt Password Encoder
-- **Documentação da API:** Springdoc OpenAPI UI (Swagger 3)
-- **Testes & Qualidade:** JUnit 5, Mockito, Spring Boot Starter Test (MockMvc), JaCoCo
-- **DevOps & Containerização:** Docker (Multi-stage build), Docker Compose, GitHub Actions (CI/CD)
+<img src="./images/projeto.gif" alt="Demonstração do App" />
 
----
+## 🌐 Deploy da Aplicação
+
+A API está hospedada no **Render** e com a documentação interativa pronta para execução e testes online:
+
+👉 **Swagger UI (Online):** [https://agrix-s01x.onrender.com/swagger-ui/index.html](https://agrix-s01x.onrender.com/swagger-ui/index.html)
+
+> ℹ️ **Nota de Disponibilidade:** No plano gratuito do Render, o serviço entra em repouso após períodos sem tráfego. Caso a aplicação esteja em espera, a primeira requisição poderá levar cerca de 30 a 50 segundos para despertar o container.
+
+## ⚡ API Endpoints
+
+Abaixo estão os principais recursos e rotas mapeadas na API:
+
+| Método | Rota | Descrição | Nível de Acesso (RBAC) |
+|---|---|---|---|
+| `POST` | `/persons` | Cadastra uma nova pessoa usuária | **Público** |
+| `POST` | `/auth/login` | Autenticação e geração de token JWT | **Público** |
+| `POST` | `/farms` | Cadastra uma nova fazenda | `USER`, `MANAGER`, `ADMIN` |
+| `GET` | `/farms` | Lista todas as fazendas | `USER`, `MANAGER`, `ADMIN` |
+| `GET` | `/farms/{id}` | Busca os detalhes de uma fazenda por ID | `USER`, `MANAGER`, `ADMIN` |
+| `POST` | `/farms/{farmId}/crops` | Registra uma nova plantação em uma fazenda | `USER`, `MANAGER`, `ADMIN` |
+| `GET` | `/farms/{farmId}/crops` | Lista todas as plantações de uma fazenda | `USER`, `MANAGER`, `ADMIN` |
+| `GET` | `/crops` | Lista todas as plantações do sistema | `MANAGER`, `ADMIN` |
+| `GET` | `/crops/{id}` | Busca os detalhes de uma plantação por ID | `USER`, `MANAGER`, `ADMIN` |
+| `GET` | `/crops/search?start=...&end=...` | Filtra plantações por intervalo de datas de colheita | `USER`, `MANAGER`, `ADMIN` |
+| `POST` | `/crops/{cropId}/fertilizers/{fertilizerId}` | Associa um fertilizante a uma plantação | `USER`, `MANAGER`, `ADMIN` |
+| `GET` | `/crops/{cropId}/fertilizers` | Lista fertilizantes vinculados a uma plantação | `USER`, `MANAGER`, `ADMIN` |
+| `POST` | `/fertilizers` | Cadastra um novo insumo fertilizante | `ADMIN` |
+| `GET` | `/fertilizers` | Lista todos os fertilizantes cadastrados | `ADMIN` |
+| `GET` | `/fertilizers/{id}` | Busca um fertilizante por ID | `ADMIN` |
+
+## ✨ Funcionalidades
+
+- **Segurança Stateless & RBAC (Role-Based Access Control):**
+  - Autenticação stateless via token JWT assinado digitalmente com HMAC256.
+  - Criptografia de senhas com algoritmo `BCrypt`.
+  - Níveis de permissão distintos: `USER` (operações fundamentais), `MANAGER` (gestão e consulta de safras) e `ADMIN` (acesso irrestrito e gestão de insumos).
+- **Gestão Agropecuária Completa:**
+  - CRUD de fazendas com cálculo de áreas e vínculo com plantações.
+  - Associação e rastreamento de safras com datas de plantio e previsão de colheita.
+  - Relação N:N (Muitos-para-Muitos) entre plantações e fertilizantes.
+- **Tratamento Global de Exceções:**
+  - Interceptação centralizada via `@ControllerAdvice` (`GeneralControllerAdvice`), garantindo respostas limpas e padronizadas para erros de negócio (`CustomError`), acessos negados (`403 Forbidden`) ou entidades inexistentes (`404 Not Found`).
+- **Documentação Viva com Swagger / OpenAPI 3:**
+  - Rotas enriquecidas com anotações `@Operation`, `@ApiResponse` e integração com `BearerAuth` para autorização direta no navegador.
+
+## 🛠️ Tecnologias e Ferramentas Utilizadas
+
+- **Core & Runtime:** Java 17 (OpenJDK / Eclipse Temurin), Spring Boot 3.1.1.
+- **Persistência & ORM:** Spring Data JPA, Hibernate ORM, MySQL 8.0 (Produção), H2 Database (Testes e desenvolvimento local).
+- **Segurança & Autenticação:** Spring Security 6, Auth0 Java JWT (v4.4.0), BCrypt.
+- **Documentação de API:** Springdoc OpenAPI UI 2.2.0 (Swagger 3).
+- **Testes & Qualidade:** JUnit 5 (Jupiter), Mockito, MockMvc (Spring Boot Test), JaCoCo (Cobertura de Código), Maven Checkstyle Plugin (Google Style Guide).
+- **DevOps & Infra:** Docker (Multi-stage build), Docker Compose, GitHub Actions (Pipeline CI/CD), Render Cloud Platform.
 
 ## 🏛️ Arquitetura da Solução
 
+O sistema adota o padrão de arquitetura em camadas (Layered Architecture), garantindo desacoplamento e facilidade para testes:
+
 ```mermaid
 graph TD
-    Client[Cliente / Frontend / Swagger UI] -->|HTTP / JSON + Bearer JWT| Security[Spring Security & JwtFilter]
-    Security --> Controllers[Controllers REST]
-    Controllers --> Services[Camada de Serviços / Regras de Negócio]
-    Services --> Repositories[Spring Data JPA Repositories]
-    Repositories --> Database[(MySQL / H2 Database)]
+    Client[Cliente HTTP / Postman / Swagger UI] -->|Requisição com Bearer Token| SecurityFilter[SecurityFilterChain & JwtFilter]
+    SecurityFilter -->|Autorizado| Controllers[Controllers REST]
+    Controllers -->|DTO / Chamada de Métodos| Services[Camada de Serviços / Regras de Negócio]
+    Services -->|Entidades JPA| Repositories[Interfaces JPA Repository]
+    Repositories -->|Queries SQL / Hibernate| Database[(Banco de Dados: MySQL / H2)]
 ```
 
----
+## 📁 Estrutura do Repositório
 
-## 📑 Documentação dos Endpoints (Swagger UI)
+```text
+agrix/
+├── .github/
+│   └── workflows/
+│       └── ci.yml               # Pipeline de integração contínua (GitHub Actions)
+├── images/                      # Diagramas e esquemas de dados
+├── src/
+│   ├── main/
+│   │   ├── java/com/betrybe/agrix/
+│   │   │   ├── config/          # Configuração OpenAPI / Swagger
+│   │   │   ├── controllers/     # Endpoints REST e mapeamentos DTO
+│   │   │   ├── error/           # Handlers globais de exceção (@ControllerAdvice)
+│   │   │   ├── models/
+│   │   │   │   ├── entities/    # Entidades JPA (Farm, Crop, Fertilizer, Person)
+│   │   │   │   └── repositories/# Interfaces Spring Data JPA
+│   │   │   ├── security/        # Filtros JWT, SecurityConfig e RBAC
+│   │   │   └── services/        # Regras de negócio e validações
+│   │   └── resources/
+│   │       ├── application.properties      # Configurações gerais (H2 em memória)
+│   │       └── application-prod.properties # Configurações de produção (MySQL)
+│   └── test/
+│       └── java/com/betrybe/agrix/         # Bateria de testes unitários e de integração
+├── docker-compose.yml           # Orquestração do container da API + MySQL 8.0
+├── Dockerfile                   # Build multi-stage otimizado para deploy em nuvem
+├── pom.xml                      # Dependências Maven e plugins de build
+├── render.yaml                  # Blueprint de infraestrutura como código para o Render
+└── README.md                    # Documentação principal do projeto
+```
 
-Após iniciar a aplicação, acesse a documentação interativa no navegador:
+## 💡 Decisões Técnicas
 
-👉 **[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)**
-
-### Principais Rotas
-
-| Método | Endpoint | Descrição | Permissão |
-|---|---|---|---|
-| `POST` | `/persons` | Cadastro de novo usuário | Público |
-| `POST` | `/auth/login` | Autenticação e geração de token JWT | Público |
-| `POST` | `/farms` | Criação de nova fazenda | Autenticado (`USER`, `MANAGER`, `ADMIN`) |
-| `GET` | `/farms` | Listagem de todas as fazendas | Autenticado (`USER`, `MANAGER`, `ADMIN`) |
-| `GET` | `/farms/{id}` | Detalhes de uma fazenda | Autenticado (`USER`, `MANAGER`, `ADMIN`) |
-| `POST` | `/farms/{farmId}/crops` | Adicionar plantação à fazenda | Autenticado (`USER`, `MANAGER`, `ADMIN`) |
-| `GET` | `/farms/{farmId}/crops` | Listar plantações de uma fazenda | Autenticado (`USER`, `MANAGER`, `ADMIN`) |
-| `GET` | `/crops` | Listar todas as plantações | `MANAGER`, `ADMIN` |
-| `GET` | `/crops/{id}` | Buscar plantação por ID | Autenticado |
-| `GET` | `/crops/search?start=...&end=...` | Buscar safras por data de colheita | Autenticado |
-| `POST` | `/crops/{cropId}/fertilizers/{fertilizerId}` | Associar fertilizante à plantação | Autenticado |
-| `GET` | `/crops/{cropId}/fertilizers` | Listar fertilizantes de uma plantação | Autenticado |
-| `POST` | `/fertilizers` | Cadastrar novo fertilizante | `ADMIN` |
-| `GET` | `/fertilizers` | Listar fertilizantes | `ADMIN` |
-| `GET` | `/fertilizers/{id}` | Buscar fertilizante por ID | `ADMIN` |
-
----
+1. **Build Multi-stage no Dockerfile:**
+   - Separação clara entre o estágio de compilação (`maven:3.9.6-alpine`) e a imagem de runtime final (`eclipse-temurin:17-jre-alpine`). Isso reduz significativamente o tamanho da imagem final e remove ferramentas desnecessárias em produção.
+2. **Execução Segura em Container (Non-Root):**
+   - Criação de um usuário e grupo dedicados (`spring:spring`), evitando a execução do processo Java como superusuário (`root`).
+3. **Autenticação Stateless com JWT:**
+   - Adoção de autenticação sem estado (Stateless Session) via token JWT, permitindo escalabilidade horizontal sem necessidade de gerenciar sessões compartilhadas no servidor.
+4. **Isolamento de Ambientes de Banco de Dados:**
+   - Utilização do H2 Database para execução de testes rápidos e isolados (sem dependência de banco externo ativo), e MySQL 8 em containers para simulação de produção idêntica ao ambiente real.
+5. **Automação com Quality Gates (CI/CD):**
+   - Pipeline no GitHub Actions executando verificação de estilo (Checkstyle Google), suíte de testes unitários e geração de relatórios JaCoCo a cada commit/PR.
 
 ## 🚀 Como Executar o Projeto
 
-### Opção 1: Via Docker Compose (Recomendado)
+### Pré-requisitos
+- **Java 17 (JDK)**
+- **Maven** (ou utilizar o wrapper incluso `mvnw` / `mvnw.cmd`)
+- **Docker e Docker Compose** (opcional, para execução containerizada)
 
-Suba a API e o banco de dados MySQL de forma totalmente automatizada:
+### Opção 1: Via Docker Compose (Recomendado)
+Para rodar a API junto com o banco MySQL 8 em containers locais:
 
 ```bash
 docker compose up --build -d
 ```
 
-A API estará pronta em `http://localhost:8080`.
+A API estará acessível em: `http://localhost:8080/swagger-ui.html`
 
-### Opção 2: Localmente via Maven
+### Opção 2: Localmente via Maven (Banco H2 em Memória)
 
-1. Certifique-se de ter o **JDK 17** instalado.
-2. Execute a aplicação:
-
+No terminal (Linux / macOS / Git Bash):
 ```bash
-# Windows
-.\mvnw.cmd spring-boot:run
-
-# Linux / Mac
 ./mvnw spring-boot:run
 ```
 
-A aplicação subirá com banco H2 em memória por padrão.
-
----
-
-## 🧪 Testes Automatizados e Qualidade
-
-Para rodar todos os testes unitários e de integração:
-
-```bash
-# Executa todos os testes
-./mvnw clean test
-
-# Gera o relatório de cobertura de código (JaCoCo)
-./mvnw jacoco:report
+No Windows PowerShell / CMD:
+```powershell
+.\mvnw.cmd spring-boot:run
 ```
 
-O relatório JaCoCo é gerado em `target/site/jacoco/index.html`.
+## 🧪 Executando os Testes
 
----
+Para rodar toda a suíte de testes unitários e de integração:
 
-## ☁️ Deploy no Render.com
+```bash
+# Executar todos os testes
+./mvnw clean test
 
-A aplicação está configurada para deploy simplificado no **[Render.com](https://render.com/)**:
+# Verificar conformidade de código (Checkstyle)
+./mvnw checkstyle:check
 
-1. Conecte seu repositório GitHub ao Render.
-2. Crie um novo **Web Service** selecionando o repositório.
-3. Escolha o ambiente **Docker**. O arquivo [`Dockerfile`](file:///d:/Code/Java/Trybe/agrix/Dockerfile) multi-stage gerenciará o build e a execução.
-4. Configure as seguintes variáveis de ambiente no painel:
-   - `PORT`: `8080`
-   - `SPRING_PROFILES_ACTIVE`: `prod`
-   - `JWT_SECRET`: *(sua chave secreta segura)*
-   - `SPRING_DATASOURCE_URL`: `jdbc:mysql://<host>:<port>/<db>` *(ou use banco PostgreSQL/MySQL gerenciado)*
-   - `SPRING_DATASOURCE_USERNAME`: `<usuario>`
-   - `SPRING_DATASOURCE_PASSWORD`: `<senha>`
-
----
+# Gerar relatório de cobertura JaCoCo
+./mvnw jacoco:report
+```
 
 ## 📄 Licença
 
