@@ -27,8 +27,8 @@ public class OpenApiConfig {
         .info(new Info()
             .title("Agrix API - Sistema de Gestão Agrícola")
             .version("1.0.0")
-            .description("API RESTful desenvolvida com Spring Boot 3 para gerenciamento de fazendas, "
-                + "plantações, fertilizantes e controle de acesso com Spring Security & JWT.")
+            .description("API RESTful desenvolvida com Spring Boot 3 para gestão "
+                + "de fazendas, plantações, fertilizantes e autenticação JWT.")
             .contact(new Contact()
                 .name("Portfólio Backend")
                 .url("https://github.com"))

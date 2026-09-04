@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Controller da entidade Crop.
  */
-@Tag(name = "Plantações (Crops)", description = "Endpoints para consulta, busca e associação de fertilizantes em plantações")
+@Tag(name = "Plantações (Crops)", description = "Gestão de plantações e fertilizantes")
 @SecurityRequirement(name = "BearerAuth")
 @RestController
 @RequestMapping("/crops")

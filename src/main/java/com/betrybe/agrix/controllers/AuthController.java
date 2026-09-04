@@ -43,7 +43,10 @@ public class AuthController {
    * @return retorna um token para autenticação futura.
    * @throws CustomError Caso o username ou password estejam incorretos retorna uma exceção.
    */
-  @Operation(summary = "Realizar login", description = "Autentica usuário existente e retorna o Bearer Token JWT")
+  @Operation(
+      summary = "Realizar login",
+      description = "Autentica usuário existente e retorna o Bearer Token JWT"
+  )
   @ApiResponse(responseCode = "200", description = "Login realizado com sucesso")
   @ApiResponse(responseCode = "403", description = "Username ou senha incorretos")
   @PostMapping("/login")
