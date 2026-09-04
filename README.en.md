@@ -25,7 +25,6 @@ A complete and modular RESTful API built for agricultural ecosystem management �
 - [🚀 How to Run the Project](#-how-to-run-the-project)
 - [🧪 Running Tests](#-running-tests)
 - [📄 License](#-license)
--
 
 ## 📝 About The Project
 
