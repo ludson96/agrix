@@ -11,7 +11,7 @@
 
 API RESTful completa e modular desenvolvida para controle de ecossistemas agrícolas — abrangendo fazendas, safras/plantações, insumos de fertilização e autenticação robusta baseada em tokens JWT e permissões RBAC.
 
-## 📑 Sumário
+## 📌 Sumário / Navegação Rápida
 
 - [📝 Sobre o Projeto](#-sobre-o-projeto)
 - [🖼️ Preview](#️-preview)

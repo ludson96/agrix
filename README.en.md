@@ -11,7 +11,7 @@
 
 A complete and modular RESTful API built for agricultural ecosystem management — covering farms, crops, fertilizer inputs, and robust authentication based on JWT tokens and RBAC permissions.
 
-## 📑 Table of Contents
+## 📌 Table of Contents / Quick Navigation
  
 - [📝 About The Project](#-about-the-project)
 - [🖼️ Preview](#️-preview)
